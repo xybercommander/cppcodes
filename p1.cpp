@@ -31,23 +31,32 @@ kaj_start{ // DIS DA MAIN FUNC
     int t;
     cin >> t;
     while(t--) {
-        int n, m, x, y;
+        ll n, m, x, y;
         cin >> n >> m >> x >> y;
-        int arr[n][m];
+        ll arr[n][m];
         
-        int w = 0;
+        ll w = 0;
         if(y - x > x) {
             w = x;
         } else {
             w = y - x;
         }
 
-        if(x + w > y) {
+        // if(x + w > y) {
+        //     while(w + x > y) {
+        //         w -= (x + w) - y;
+        //     }
+        // }
+        if(w + x > y) {
             w -= (x + w) - y;
         }
 
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < m; j++) {
+        if(y >= x * 2) {
+            w = y - x;
+        }
+
+        for(ll i = 0; i < n; i++) {
+            for(ll j = 0; j < m; j++) {
                 if(i % 2 == 0) {
                     if(j % 2 == 0) {
                         arr[i][j] = x;
@@ -64,13 +73,13 @@ kaj_start{ // DIS DA MAIN FUNC
             }
         }
 
-        int sum = 0;
-        for (int i = 0; i < n; ++i)
+        ll sum = 0;
+        for (ll i = 0; i < n; ++i)
         {
-            for(int j = 0; j < m; ++j) {
-                // cout << arr[i][j] << " ";
+            for(ll j = 0; j < m; ++j) {
+                cout << arr[i][j] << " ";
                 sum += arr[i][j];
-            }
+            }cout << endl;
         }
         cout << sum << endl;
     }
