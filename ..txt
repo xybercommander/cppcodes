@@ -1,0 +1,4 @@
+create table Items
+(Item# varchar(2) not null primary key,
+ Item-Name varchar(20) not null,
+ Price dec);
