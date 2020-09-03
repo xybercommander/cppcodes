@@ -18,6 +18,18 @@ string toBinary(int n)
     return r;
 }
 
+int binaryToDecimal(string s) 
+{ 
+    double j = 0;
+    for(int i = 0; i < s.size(); i++) {
+        if(s[i] == '1') {
+            j += pow(2, s.size() - 1 - i);
+        }
+    }
+
+    return (int)j;
+}
+
 void swap(int *x, int *y) {
     int temp = *x;
     *x = *y;

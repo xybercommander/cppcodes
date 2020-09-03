@@ -18,18 +18,6 @@ string toBinary(int n)
     return r;
 }
 
-int binaryToDecimal(string s) 
-{ 
-    double j = 0;
-    for(int i = 0; i < s.size(); i++) {
-    	if(s[i] == '1') {
-    		j += pow(2, s.size() - 1 - i);
-    	}
-    }
-
-    return (int)j;
-}
-
 void swap(int *x, int *y) {
     int temp = *x;
     *x = *y;
@@ -45,40 +33,36 @@ kaj_start{ // DIS DA MAIN FUNC
     while(t--) {
 		int n;
 		cin >> n;
-		std::vector<int> v(n);
-		for(int i = 0; i < n; i++) {
+		vector<int> v(n), freq;
+		for(int i = 0 ; i < n; i++) {
 			cin >> v[i];
 		}
 
-		std::vector<string> nums;
+		set<int> s, s1;
 		for(int i : v) {
-			string s = toBinary(i);
-			if(s[0] == '1') {
-				nums.push_back(s);
-			}
+			s.insert(i);
 		}
 
-		// string x = nums[0], y = nums[nums.size() - 1];
-		// nums[0] += y;
-		// nums[nums.size() - 1] += x;
+		for(auto it = s.begin(); it != s.end(); it++) {
+			freq.push_back(count(v.begin(), v.end(), *it));
+		}
+
+		for(int i : freq) {
+			s1.insert(i);
+		}
+
+		map<int, int> m;
+		for(auto it = s1.begin(); it != s1.end(); it++) {
+			m.insert(pair<int, int>( count(freq.begin(), freq.end(), *it), *it));
+		}
 
 		int ans = 0;
-		for(int i = 0; i < nums.size(); i++) {
-			for(int j = i + 1; j < nums.size(); j++) {
-				string x = nums[i];
-				string y = nums[j];
-				nums[i] += y;
-				nums[j] += x;
-				int tempMax = max(binaryToDecimal(nums[i]), binaryToDecimal(nums[j]));
-				int tempMin = min(binaryToDecimal(nums[i]), binaryToDecimal(nums[j]));
-				ans = max(ans, tempMax - tempMin);
-				// cout << tempMax - tempMin << endl;
-				nums[i] = x;
-				nums[j] = y;
-			}
+		for(map<int, int>::iterator it = m.begin(); it != m.end(); it++) {
+			// cout << it->first << " " << it->second << endl;
+			ans = max(ans, it->first);
 		}
-		cout << ans << endl;
-		
+
+		cout << m[ans] << endl;
     }
 
     kaj_shesh;

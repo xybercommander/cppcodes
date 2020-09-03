@@ -24,27 +24,31 @@ void swap(int *x, int *y) {
     *y = temp;
 }
 
+void addEdge(vector<int> adj[], int u, int v) {
+	adj[u].push_back(v);
+	adj[v].push_back(u);
+}
+
+void printGraph(vector<int> adj[], int V) {
+	for(int i = 0; i < V; i++) {
+		cout << "\nAdjacency list of vertex " << i << ":\n" << i << "->";
+		for(auto x : adj[i]) {
+			cout << "->" << x;
+		}cout << endl;
+	}
+}
+
 kaj_start{ // DIS DA MAIN FUNC
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int n;
-    cin >> n;
-    int dp[n + 1];
-    dp[0] = 0;
-    dp[1] = 1;
-    if(n == 1 || n == 2) {
-        for(int i = 0; i < n; i++) {
-            cout << dp[i] << " ";
-        }
-    } else {
-        for(int i = 2; i < n; i++) {
-            dp[i] = dp[i - 1] + dp[i - 2];
-        }
-        for(int i = 0; i < n; i++) {
-            cout << dp[i] << " ";
-        }
-    }
+    int V = 4;
+    vector<int> adj[V];
+    addEdge(adj, 0, 2);
+    addEdge(adj, 0, 1);
+    addEdge(adj, 1, 2);
+    addEdge(adj, 3, 2);
+    printGraph(adj, V);
 
     kaj_shesh;
 }
