@@ -46,6 +46,7 @@ kaj_start{ // DIS DA MAIN FUNC
 		for(auto it = s.begin(); it != s.end(); it++) {
 			freq.push_back(count(v.begin(), v.end(), *it));
 		}
+		
 
 		for(int i : freq) {
 			s1.insert(i);
